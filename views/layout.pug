@@ -1,0 +1,32 @@
+doctype html
+html(lang='en')
+  head
+    title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    div(class='container')
+      header
+        div(class='logo')
+          h1 Members Only
+        div(class='sidebar')
+          block sidebar
+            ul(class='sidebar-nav')
+              li
+                a(href='/') Home
+              div
+                if user
+                  li
+                    a(href='/users/user_profile') Profile #{user.first_name} #{user.last_name}
+                  li
+                    a(href='/users/user_logout') Logout
+                else
+                  li
+                    a(href='/users/user_register') Register
+                  li
+                    a(href='/users/user_login') Login
+      main
+        div(class='content')
+          block content
+      footer

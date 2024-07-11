@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1=title
+
+  if message === 'success' 
+    p Log in to start session
+  if message === 'passwordMismatch'
+    p Passwords do not match
+
+  form(method='POST')
+    div.form-group
+      label(for='email') Email:
+      input#email.form-control(type='email', placeholder='example@example.com', name='email', maxlength='50', required value='')
+    div.form-group
+      label(for='password') Password:
+      input#password.form-control(type='password', name='password', minlength='6', maxlength='30', required value='')
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg

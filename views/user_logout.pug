@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h3=title + ' ' + user.email
+
+  form(action='/users/user_logout' method='POST')
+    button.btn.btn-primary(type='submit') Logout
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg

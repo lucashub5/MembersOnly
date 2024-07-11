@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  if message === 'admin_failed'
+    a Admin code incorrect.
+  if message === 'admin_success'
+    a You are now a admin.
+
+  if user
+    h1.profile-h1 Hello #{user.first_name}
+    h2.profile-h2 #{user.last_name}
+
+    div
+      h3 Profile:
+      ul.profile-list
+        li Email: #{user.email}
+        li Joined On: #{user.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        li Is Member: #{user.member_status ? 'Yes' : 'No'}
+        li Is Admin: #{user.admin ? 'Yes' : 'No'}
+
+    if !user.admin
+      form(method='POST' action='/users/user_get_admin')
+        label(for='admin_code') Get administrator privileges: 
+        input(type='text' name='admin_code' required=true)
+        button(type='submit') Send
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg

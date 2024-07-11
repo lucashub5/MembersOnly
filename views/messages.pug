@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  if message === 'success'
+    a You have logged in.
+  if message === 'logout'
+    a You have successfully logged out.
+  if message === 'messageSuccess'
+    a The message was sent successfully.
+  if message === 'member_status_failed'
+    a Member code incorrect.
+  if message === 'member_status_success'
+    a You are now a member!
+
+  h1= title
+
+  if user
+    form(action="/messages/send_message" method="POST")
+      div.form-group
+        input#title.form-control(type="text" name="title" placeholder="Write a title for the message...", required=true)
+      div.form-group
+        textarea#text.form-control(name="text" rows="5" cols="47" placeholder="Write whatever comes to mind", required=true)
+      div
+        button.btn.btn-primary(type="submit") Send your message
+  hr
+  if user && !user.member_status
+    form(action="/messages/get_member_status" method="POST")
+      div.form-group
+        input#text.form-control(type="text" name="member_code" minlength="5" maxlength="5" placeholder="Write the code to see authors and dates in the messages", required=true)
+      div
+        button.btn.btn-primary(type="submit") Send member code
+
+  if messages_list.length > 0
+    ul.messages-list
+      each message in messages_list
+        li
+          h3= message.title
+          h4= message.text
+          if user
+            if user.member_status
+              div.message-member
+                p #{message.author.first_name} #{message.author.admin ? '● Admin' : ''} #{message.author.member_status ? '● Member' : ''}
+                p #{message.date.toLocaleString()}
+
+  if errors
+    ul
+      each error in errors
+        li!= error.msg
