@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler';
-import Message from '../models/message.js';
+import Message from '../models/message.mjs';
 import { validationResult, body } from 'express-validator';
-import User from '../models/user.js';
+import User from '../models/user.mjs';
 
 export const messages_get = asyncHandler(async (req, res, next) => {
     const message = req.query.message;

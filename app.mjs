@@ -10,10 +10,10 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import bcrypt from 'bcryptjs';
 
-import userRoutes from './routes/users.js';
-import indexRoute from './routes/index.js';
-import messagesRoutes from './routes/messages.js';
-import User from './models/user.js';
+import userRoutes from './routes/users.mjs';
+import indexRoute from './routes/index.mjs';
+import messagesRoutes from './routes/messages.mjs';
+import User from './models/user.mjs';
 
 dotenv.config();
 

@@ -8,7 +8,7 @@ import {
     logoutUser_post,
     profileUser_get,
     getAdminUser_post
-} from '../controllers/userController.js';
+} from '../controllers/userController.mjs';
 
 const router = express.Router();
 
